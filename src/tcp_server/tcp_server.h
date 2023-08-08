@@ -3,7 +3,6 @@
 
 #include <winsock2.h>
 
-#define PORT 4000
 #define SOCKET_TIMEOUT_MS 10
 
 // Initialize the server and start listening

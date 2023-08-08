@@ -9,6 +9,6 @@
 void write_stdio(const char *input, uint32_t inputLength, int stdioMsgId);
 
 // Read data from the stdio interface
-uint32_t read_stdio(char *output, uint32_t bufferSize, uint32_t *outputLength);
+int read_stdio(char *output, uint32_t bufferSize, uint32_t *outputLength);
 
 #endif

@@ -1,29 +1,25 @@
-REM Set directories and filenames
-set SRC_DIR=src
-set BIN_DIR=bin
-set EXECUTABLE_NAME=chrome_proxy.exe
+@echo off
 
-REM Remove old executable
-if exist %BIN_DIR%\%EXECUTABLE_NAME% (
-    echo Removing old executable...
-    del %BIN_DIR%\%EXECUTABLE_NAME%
+REM Set directories and filenames
+IF NOT DEFINED EXECUTABLE_NAME (
+    echo EXECUTABLE_NAME is not defined.
+    exit /b 1
 )
 
-REM Compile individual C source files into object files
-echo Compiling individual source files...
-wsl x86_64-w64-mingw32-gcc -c %SRC_DIR%/stdio_interface/stdio_interface.c -o %SRC_DIR%/stdio_interface/stdio_interface.o -I%SRC_DIR%
-wsl x86_64-w64-mingw32-gcc -c %SRC_DIR%/tcp_server/tcp_server.c -o %SRC_DIR%/tcp_server/tcp_server.o -I%SRC_DIR%
-wsl x86_64-w64-mingw32-gcc -c %SRC_DIR%/main.c -o %SRC_DIR%/main.o -I%SRC_DIR%/stdio_interface -I%SRC_DIR%/tcp_server
+IF NOT DEFINED DEPENDENCY_LIST (
+    echo DEPENDENCY_LIST is not defined.
+    exit /b 1
+)
 
-REM Link all object files together to create the final executable
-echo Linking object files...
-wsl x86_64-w64-mingw32-gcc %SRC_DIR%/main.o %SRC_DIR%/stdio_interface/stdio_interface.o %SRC_DIR%/tcp_server/tcp_server.o -lws2_32 -o %BIN_DIR%/%EXECUTABLE_NAME%
+REM Remove old executable
+if exist bin\%EXECUTABLE_NAME% (
+    echo Removing old executable...
+    del bin\%EXECUTABLE_NAME%
+)
 
-REM Clean up intermediate object files
-echo Cleaning up...
-del %SRC_DIR%\main.o
-del %SRC_DIR%\stdio_interface\stdio_interface.o
-del %SRC_DIR%\tcp_server\tcp_server.o
+REM Compile and link all source files directly into the final executable
+echo Compiling and linking source files...
+wsl x86_64-w64-mingw32-gcc %DEPENDENCY_LIST% -Isrc -lws2_32 -o bin/%EXECUTABLE_NAME%
 
 REM Check if the compilation was successful.
 IF %ERRORLEVEL% NEQ 0 (
@@ -32,3 +28,4 @@ IF %ERRORLEVEL% NEQ 0 (
 )
 
 echo Compilation successful.
+exit /b 0

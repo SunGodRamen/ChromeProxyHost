@@ -1,31 +1,46 @@
-#include <stdint.h>
 #include "stdio_interface.h"
-#include <stdio.h>
+#include "../logger/logger.h"
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <stdint.h>
 
 #ifdef _WIN32
 #include <io.h>
 #include <fcntl.h>
 #endif
 
-// Write data to the stdio interface
+#define BUFFER_SIZE 1024
+
 void write_stdio(const char *input, uint32_t inputLength, int stdioMsgId) {
-    char buffer[BUFFER_SIZE];
-    uint32_t messageLength = snprintf(buffer, sizeof(buffer), "%u:%s", stdioMsgId, input);
 
 #ifdef _WIN32
+    // Ensure the I/O mode is set to binary on Windows
     _setmode(_fileno(stdout), _O_BINARY);
 #endif
 
+    char buffer[BUFFER_SIZE];
+    // Format the message in JSON format with the ID and content
+    uint32_t messageLength = snprintf(buffer, sizeof(buffer), "{\"id\":%d,\"content\":\"%s\"}", stdioMsgId, input);
+
+    // Check for overflow
+    if (messageLength >= sizeof(buffer)) {
+        write_log("Error: Message too long to fit in buffer");
+        return;
+    }
+
+    // Write the message length (first 4 bytes)
     fwrite(&messageLength, sizeof(messageLength), 1, stdout);
+    
+    // Write the message content
     fwrite(buffer, sizeof(char), messageLength, stdout);
+
+    // Flush the output buffer
     fflush(stdout);
 }
 
-// Read data from the stdio interface and extract message ID
-uint32_t read_stdio(char *output, uint32_t bufferSize, uint32_t *outputLength) {
-    uint32_t messageID = 0;  // Default ID if no ID is found
+// Read data from the stdio interface and extract message content
+int read_stdio(char *output, uint32_t bufferSize, uint32_t *outputLength) {
     
 #ifdef _WIN32
     // Ensure the I/O mode is set to binary on Windows
@@ -45,21 +60,29 @@ uint32_t read_stdio(char *output, uint32_t bufferSize, uint32_t *outputLength) {
         // Handle read error
         *outputLength = 0;
         output[0] = '\0';
+        return -1;
     }
 
     output[*outputLength] = '\0'; // Null-terminate the string
-    
-    // Extract the ID without using sscanf
-    char *colonPosition = strchr(output, ':');
-    if (colonPosition) {
-        messageID = (uint32_t)strtol(output, NULL, 10);
-        
-        // Remove the ID and colon from the output without modifying actual content
-        size_t remainingLength = *outputLength - ((colonPosition + 1) - output);
-        memmove(output, colonPosition + 1, remainingLength);
-        output[remainingLength] = '\0';  // Null-terminate the updated string
+
+    // Extract the message content from the JSON
+    char *start = strstr(output, "\"content\":\"");
+    if (start) {
+        start += strlen("\"content\":\"");
+        char *end = strchr(start, '"');
+        if (end) {
+            *end = '\0';
+            size_t contentLength = end - start;
+            if (contentLength >= bufferSize) {
+                // Handle content too long
+                *outputLength = 0;
+                output[0] = '\0';
+                return -1;
+            }
+            memmove(output, start, contentLength + 1);  // +1 for the null-terminator
+            *outputLength = contentLength;
+        }
     }
 
-    return messageID;  // Return the extracted message ID
+    return 0;  // Success
 }
-

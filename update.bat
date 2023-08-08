@@ -1,40 +1,54 @@
 @echo off
 
-REM Call the compilation script.
+:: Set values for the script
+set "EXECUTABLE_NAME=chrome_proxy.exe"
+set "DEPENDENCY_LIST=src/logger/logger.c src/stdio_interface/stdio_interface.c src/tcp_server/tcp_server.c src/main.c"
+set "APPLICATION_PATH=C:\Program Files\Chrome Proxy"
+set "MANIFEST_PATH=%APPLICATION_PATH%\manifest.json"
+set "COMPANY_NAME=com.ra.chrome_proxy"
+
+:: Call the termination script.
+CALL terminate.bat
+IF %ERRORLEVEL% NEQ 0 (
+    echo Not compiling files.
+    exit /b 1
+)
+
+:: Call the compilation script.
 CALL compile.bat
-REM Check if the compilation was successful.
 IF %ERRORLEVEL% NEQ 0 (
     echo Not copying files.
     exit /b 1
 )
 
-REM Check if program directory exists, if not, create it.
-IF NOT EXIST "C:\Program Files\Chrome Proxy" (
+:: Check if program directory exists, if not, create it.
+IF NOT EXIST "%APPLICATION_PATH%" (
     echo Directory not found, creating...
-    mkdir "C:\Program Files\Chrome Proxy"
+    mkdir "%APPLICATION_PATH%"
 )
 
-REM Copy the manifest and executable to the target directory.
+:: Copy the manifest and executable to the target directory.
 echo Copying files...
-copy /Y "src\manifest.json" "C:\Program Files\Chrome Proxy\manifest.json"
-copy /Y "bin\chrome_proxy.exe" "C:\Program Files\Chrome Proxy\chrome_proxy.exe"
+copy /Y "src\manifest.json" "%MANIFEST_PATH%"
+copy /Y bin\%EXECUTABLE_NAME% "%APPLICATION_PATH%\%EXECUTABLE_NAME%"
 
-REM Check if the copying was successful.
+:: Check if the copying was successful.
 IF %ERRORLEVEL% NEQ 0 (
     echo Failed to copy the files.
     exit /b 1
 )
 
-REM Check for the registry entry
-REG QUERY "HKCU\Software\Google\Chrome\NativeMessagingHosts\com.ra.chrome_proxy"
+:: Check for the registry entry
+set "REGISTRY_KEY=HKCU\Software\Google\Chrome\NativeMessagingHosts\%COMPANY_NAME%"
+REG QUERY %REGISTRY_KEY% /ve > nul
 IF %ERRORLEVEL% NEQ 0 (
     echo Registry entry not found, adding...
 
-    REM Add the manifest to the registry:
-    REM HKCU\Software\Google\Chrome\NativeMessagingHosts\com.ra.chrome_proxy
-    REM (Default) = C:\Program Files\Chrome Proxy\manifest.json
+    :: Add the manifest to the registry:
+    :: HKCU\Software\Google\Chrome\NativeMessagingHosts\%COMPANY_NAME%
+    :: (Default) = %MANIFEST_PATH%
 
-    REG ADD "HKCU\Software\Google\Chrome\NativeMessagingHosts\com.ra.chrome_proxy" /ve /t REG_SZ /d "C:\Program Files\Chrome Proxy\manifest.json" /f
+    REG ADD "HKCU\Software\Google\Chrome\NativeMessagingHosts\%COMPANY_NAME%" /ve /t REG_SZ /d "%MANIFEST_PATH%" /f
 )
 
 echo Operation successful.
