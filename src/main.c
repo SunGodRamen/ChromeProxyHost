@@ -10,7 +10,6 @@
 #define TCP_PORT 4000
 SOCKET clientSocket;
 
-
 // Monitor the stdio interface for messages from the Chrome extension
 DWORD WINAPI monitor_stdio(LPVOID lpParameter) {
     char stdioMsg[BUFFER_SIZE];
@@ -41,7 +40,6 @@ DWORD WINAPI monitor_stdio(LPVOID lpParameter) {
 
 // Setup and Monitor the TCP server for messages from the AutoHotkey script
 DWORD WINAPI monitor_tcp(LPVOID lpParameter) {
-    uint32_t stdioMsgId = 1;
     // Initialize TCP server
     SOCKET serverSocket = init_server(TCP_PORT);
     clientSocket = accept_connection(serverSocket);
@@ -64,7 +62,7 @@ DWORD WINAPI monitor_tcp(LPVOID lpParameter) {
             write_log(msg_buffer);
 
             // Send the message to the stdio interface
-            write_stdio(clientMsg, bytesRead, stdioMsgId++);
+            write_stdio(clientMsg);
         }
     }
     cleanup_server(serverSocket, clientSocket);

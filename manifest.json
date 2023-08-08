@@ -1,9 +1,9 @@
 {
   "name": "com.ra.chrome_proxy",
-  "description": "Chrome-Proxy",
+  "description": "ChromeProxyHost",
   "path": "C:\\Program Files\\Chrome Proxy\\chrome_proxy.exe",
   "type": "stdio",
   "allowed_origins": [
-    "chrome-extension://ojebocbpoanicmlbmelfknadhcdgojgi/"
+    "chrome-extension://hmodgincmkdeedhaehaloicmcplddnbe/"
   ]
 }

@@ -4,12 +4,12 @@ FILE *logFile = NULL;
 HANDLE logMutex = NULL;
 
 void init_logger() {
-    logFile = fopen("C:\\Users\\avons\\Code\\Chrome\\Chrome-Proxy\\myLog.txt", "a");
+    logFile = fopen("C:\\Users\\avons\\Code\\Chrome\\ChromeProxyHost\\logFile.txt", "a");
     if (logFile == NULL) {
-        // Print the error to stderr
-        fprintf(stderr, "Error: Unable to open log file for writing.\n");
+        perror("Error opening file");
         exit(-1);
     }
+
     logMutex = CreateMutex(NULL, FALSE, NULL);
     if (logMutex == NULL) {
         // Print the error to stderr

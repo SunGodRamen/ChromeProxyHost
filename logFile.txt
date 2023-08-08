@@ -1,0 +1,113 @@
+TCP: Received 18 bytes from client: {"test\": "test"}
+
+{"test\": "test"}
+TCP: Received 18 bytes from client: {"test\": "test"}
+
+TCP: Received 18 bytes from client: {"test\": "test"}
+
+TCP: Bind failed. Error Code: 10048
+
+TCP: Received 17 bytes from client: {"test": "test"}
+
+TCP: Bind failed. Error Code: 10048
+
+TCP: Bind failed. Error Code: 10048
+
+TCP: Received 112 bytes from client: {"feature": "tab_focus", "function": "findInTabs", "parameters": "https://example.com", "callback": "focusTab"}
+
+TCP: Bind failed. Error Code: 10048
+
+TCP: Bind failed. Error Code: 10048
+
+TCP: Bind failed. Error Code: 10048
+
+TCP: Received 112 bytes from client: {"feature": "tab_focus", "function": "findInTabs", "parameters": "https://example.com", "callback": "focusTab"}
+
+TCP: Received 107 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://example.com", "callback": "focusTab"}
+
+TCP: Bind failed. Error Code: 10048
+
+TCP: Received 107 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://example.com", "callback": "focusTab"}
+
+TCP: Received 107 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://example.com", "callback": "focusTab"}
+
+TCP: Bind failed. Error Code: 10048
+
+TCP: Received 107 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://example.com", "callback": "focusTab"}
+
+TCP: Received 106 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://google.com", "callback": "focusTab"}
+
+TCP: Received 110 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://www.google.com", "callback": "focusTab"}
+
+TCP: Bind failed. Error Code: 10048
+
+TCP: Received 111 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://www.google.com/", "callback": "focusTab"}
+
+TCP: Received 111 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://www.google.com/", "callback": "focusTab"}
+
+TCP: Received 111 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://www.google.com/", "callback": "focusTab"}
+
+TCP: Received 111 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://www.google.com/", "callback": "focusTab"}
+
+TCP: Received 111 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://www.google.com/", "callback": "focusTab"}
+
+TCP: Received 111 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://www.google.com/", "callback": "focusTab"}
+
+TCP: Received 111 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://www.google.com/", "callback": "focusTab"}
+
+TCP: Received 111 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://www.google.com/", "callback": "focusTab"}
+
+TCP: Received 111 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://www.google.com/", "callback": "focusTab"}
+
+TCP: Received 111 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://www.google.com/", "callback": "focusTab"}
+
+TCP: Received 111 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://www.google.com/", "callback": "focusTab"}
+
+TCP: Received 111 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://www.google.com/", "callback": "focusTab"}
+
+TCP: Received 111 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "https://www.google.com/", "callback": "focusTab"}
+
+TCP: Received 109 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "*://mail.google.com/*", "callback": "focusTab"}
+
+TCP: Received 109 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "*://mail.google.com/*", "callback": "focusTab"}
+
+TCP: Bind failed. Error Code: 10048
+
+TCP: Bind failed. Error Code: 10048
+
+TCP: Received 109 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "*://mail.google.com/*", "callback": "focusTab"}
+
+TCP: Received 109 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "*://mail.google.com/*", "callback": "focusTab"}
+
+TCP: Bind failed. Error Code: 10048
+
+TCP: Received 109 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "*://mail.google.com/*", "callback": "focusTab"}
+
+TCP: Bind failed. Error Code: 10048
+
+TCP: Received 109 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "*://mail.google.com/*", "callback": "focusTab"}
+
+TCP: Bind failed. Error Code: 10048
+
+TCP: Received 109 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "*://mail.google.com/*", "callback": "focusTab"}
+
+TCP: Received 109 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "*://mail.google.com/*", "callback": "focusTab"}
+
+TCP: Received 109 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "*://mail.google.com/*", "callback": "focusTab"}
+
+TCP: Bind failed. Error Code: 10048
+
+TCP: Received 109 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "*://mail.google.com/*", "callback": "focusTab"}
+
+TCP: Bind failed. Error Code: 10048
+
+TCP: Received 109 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "*://mail.google.com/*", "callback": "focusTab"}
+
+TCP: Received 109 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "*://mail.google.com/*", "callback": "focusTab"}
+
+TCP: Bind failed. Error Code: 10048
+
+TCP: Received 109 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "*://mail.google.com/*", "callback": "focusTab"}
+
+TCP: Received 109 bytes from client: {"feature": "tabs", "function": "findInTabs", "parameters": "*://mail.google.com/*", "callback": "focusTab"}
+

@@ -6,7 +6,7 @@
 #define BUFFER_SIZE 1024
 
 // Write data to the stdio interface
-void write_stdio(const char *input, uint32_t inputLength, int stdioMsgId);
+void write_stdio(const char *jsonOutput);
 
 // Read data from the stdio interface
 int read_stdio(char *output, uint32_t bufferSize, uint32_t *outputLength);

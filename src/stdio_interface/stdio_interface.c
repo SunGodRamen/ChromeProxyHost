@@ -12,32 +12,32 @@
 
 #define BUFFER_SIZE 1024
 
-void write_stdio(const char *input, uint32_t inputLength, int stdioMsgId) {
+void write_stdio(const char *jsonOutput) {
 
 #ifdef _WIN32
     // Ensure the I/O mode is set to binary on Windows
     _setmode(_fileno(stdout), _O_BINARY);
 #endif
 
-    char buffer[BUFFER_SIZE];
-    // Format the message in JSON format with the ID and content
-    uint32_t messageLength = snprintf(buffer, sizeof(buffer), "{\"id\":%d,\"content\":\"%s\"}", stdioMsgId, input);
+    char output[BUFFER_SIZE];
+    uint32_t jsonOutputLength = snprintf(output, sizeof(output), "%s", jsonOutput);
 
-    // Check for overflow
-    if (messageLength >= sizeof(buffer)) {
+    // If the input length is too big, log an error
+    if (jsonOutputLength >= sizeof(output)) {
         write_log("Error: Message too long to fit in buffer");
         return;
     }
 
     // Write the message length (first 4 bytes)
-    fwrite(&messageLength, sizeof(messageLength), 1, stdout);
+    fwrite(&jsonOutputLength, sizeof(jsonOutputLength), 1, stdout);
     
-    // Write the message content
-    fwrite(buffer, sizeof(char), messageLength, stdout);
+    // Write the JSON content
+    fwrite(output, sizeof(char), jsonOutputLength, stdout);
 
     // Flush the output buffer
     fflush(stdout);
 }
+
 
 // Read data from the stdio interface and extract message content
 int read_stdio(char *output, uint32_t bufferSize, uint32_t *outputLength) {
